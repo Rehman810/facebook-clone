@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
+import Blank from "../../../assets/blank-profile.png";
 import Profile from "../../../assets/profile.jpg";
 import Story from "../../../assets/story.png";
 import { BsPlusCircleFill } from "react-icons/bs";
+import { UserDataContext } from "../../../Context/Context";
 
 const Stories = () => {
+  const { userData } = useContext(UserDataContext);
+
   return (
     <div className="story-section">
       <div className="create-story">
-        <img
-          src={Profile}
-          alt="profile"
-          style={{ width: "10vw", borderRadius: "10px 10px 0px 0px" }}
-        />
+        {userData.photoURL ? (
+          <img
+            src={userData.photoURL}
+            alt="profile"
+            style={{
+              width: "10vw",
+              height: "10vw",
+              borderRadius: "10px 10px 0px 0px",
+            }}
+          />
+        ) : (
+          <img
+            src={Blank}
+            alt="profile"
+            style={{ width: "10vw", borderRadius: "10px 10px 0px 0px" }}
+          />
+        )}
         <BsPlusCircleFill
           color="blue"
           size={30}

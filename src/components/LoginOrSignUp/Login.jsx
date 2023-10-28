@@ -7,7 +7,11 @@ import { useNavigate } from "react-router-dom";
 // import Swal from "sweetalert2";
 
 const Login = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const Signup = () => {
+    navigate("/page2/signup");
+  };
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -19,7 +23,7 @@ const Login = () => {
           if (user) {
             console.log("user found", e.user.uid);
             localStorage.setItem("uid", e.user.uid);
-            // navigate("/");
+            navigate("/page1/");
           } else {
             console.log("user not found", user.uid);
           }
@@ -62,7 +66,9 @@ const Login = () => {
           }}
         >
           <span className="login-bottom-btn">Forgotten account?</span>
-          <span className="login-bottom-btn">Sign up for Facebook</span>
+          <span className="login-bottom-btn" onClick={() => Signup()}>
+            Sign up for Facebook
+          </span>
         </div>
       </div>
     </div>

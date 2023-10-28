@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Search from "./Search";
 import Logo from "../../assets/logo.png";
 import { GoHomeFill } from "react-icons/go";
@@ -8,9 +8,15 @@ import { IoIosPeople } from "react-icons/io";
 import { TbGridDots } from "react-icons/tb";
 import { BiLogoMessenger } from "react-icons/bi";
 import { BsFillBellFill } from "react-icons/bs";
-import Profile from "../../assets/profile.jpg";
+import UserNavigation from "../ExtraComp/UserNavigation";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const Home = () => {
+    navigate("/page1/");
+  };
   return (
     <div
       style={{
@@ -33,9 +39,11 @@ const Navbar = () => {
           justifyContent: "space-between",
           alignItems: "center",
           marginLeft: 20,
+          cursor: "pointer",
         }}
       >
         <img
+          onClick={() => Home()}
           src={Logo}
           style={{ width: "40px", height: "40px", marginRight: 10 }}
           alt="logo"
@@ -91,16 +99,7 @@ const Navbar = () => {
           color="black"
           style={{ backgroundColor: "#D8DADF", borderRadius: 50, padding: 8 }}
         />
-        <img
-          src={Profile}
-          alt="profile"
-          style={{
-            width: 40,
-            height: 40,
-            borderRadius: "50px",
-            marginRight: 20,
-          }}
-        />
+        <UserNavigation />
       </div>
     </div>
   );

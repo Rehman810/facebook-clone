@@ -1,30 +1,52 @@
-import React from "react";
-import Profile from "../../assets/profile.jpg";
+import React, { useContext } from "react";
+import Profile from "../../assets/blank-profile.png";
 import { FaUserFriends } from "react-icons/fa";
 import { RiMemoriesFill } from "react-icons/ri";
 import { BsSaveFill, BsCameraFill, BsCalendarEventFill } from "react-icons/bs";
 import { MdGroups, MdOndemandVideo } from "react-icons/md";
 import { AiFillShop, AiFillHeart } from "react-icons/ai";
 import { VscGraph } from "react-icons/vsc";
+import { useNavigate } from "react-router-dom";
+import { UserDataContext } from "../../Context/Context";
 
 const Menu = () => {
+  const navigate = useNavigate();
+  const { userData } = useContext(UserDataContext);
+
+  const ProfilePage = () => {
+    navigate("/page1/profilePage");
+  };
+
   return (
     <div
       className="side-fixed"
       style={{ marginTop: 70, overflow: "auto", width: "30%" }}
     >
-      <div className="sidebar">
-        <img
-          src={Profile}
-          alt="profile"
-          style={{
-            width: 40,
-            height: 40,
-            borderRadius: "50px",
-            marginRight: 20,
-          }}
-        />
-        <span style={{ fontWeight: "bold" }}>Abdul Rehman</span>
+      <div className="sidebar" onClick={() => ProfilePage()}>
+        {userData.photoURL ? (
+          <img
+            src={userData.photoURL}
+            alt="profile"
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: "50px",
+              marginRight: 20,
+            }}
+          />
+        ) : (
+          <img
+            src={Profile}
+            alt="profile"
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: "50px",
+              marginRight: 20,
+            }}
+          />
+        )}
+        <span style={{ fontWeight: "bold" }}>{userData.FullName}</span>
       </div>
       <div className="sidebar">
         <FaUserFriends size={30} />

@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-import Profile from "../../../assets/profile.jpg";
+import Profile from "../../../assets/blank-profile.png";
 import Posts from "../../../assets/story.png";
 import { AiTwotoneLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 import { AiOutlineLike } from "react-icons/ai";
 import { PiShareFatThin } from "react-icons/pi";
+import { UserDataContext } from "../../../Context/Context";
 
 const Post = () => {
+  const { userData } = useContext(UserDataContext);
+
   return (
     <div className="Post">
       <div className="post-head">
@@ -19,17 +22,31 @@ const Post = () => {
             alignItems: "center",
           }}
         >
-          <img
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: "50px",
-              marginLeft: 10,
-              marginRight: 20,
-            }}
-            src={Profile}
-            alt="profile"
-          />
+          {userData.photoURL ? (
+            <img
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: "50px",
+                marginLeft: 10,
+                marginRight: 20,
+              }}
+              src={userData.photoURL}
+              alt="profile"
+            />
+          ) : (
+            <img
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: "50px",
+                marginLeft: 10,
+                marginRight: 20,
+              }}
+              src={Profile}
+              alt="profile"
+            />
+          )}
           <div
             style={{
               display: "flex",
@@ -37,7 +54,9 @@ const Post = () => {
               alignItems: "flex-start",
             }}
           >
-            <span style={{ marginTop: "5px", fontSize: 18 }}>Abdul Rehman</span>
+            <span style={{ marginTop: "5px", fontSize: 18 }}>
+              {userData.FullName}
+            </span>
             <p style={{ fontSize: 11, marginTop: "-1px" }}>
               30 September at 04:45
             </p>
